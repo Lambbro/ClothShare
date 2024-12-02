@@ -1,0 +1,48 @@
+MainActivity 
+	- auth
+	- splashScreen(auth, nav)
+
+AccountScreen 
+	- auth
+-> MainScreen
+
+MainScreen
+	- auth
+	- firebase.getInstance()
+
+_HomeScreen
+	- items = firebase.items
+-> ItemDetails(index, items)
+
+__ItemDetails
+	- item
+-> TransactionScreen
+	- createTransaction()
+
+_MyItemScreen
+	> MyItems
+		shares = firebase.items(findBy myId)
+		+ deleteItem (itemId)
+	> FavoriteItems
+		- favorites = firebase.items(findBy myId)
+		+ unfavor (favoriteId)
+-> ItemDetails(index, items)
+
+_AddItemScreen
+	+ createItem(item)
+-> GoogleMapScreen
+
+_GoogleMapScreen
+	+ location
+-> AddItemScreen
+
+_TransactionScreen
+	> Request
+		- transactions = firebase.transactions
+		+ changeStatus (transactionId, type) -> accepted, rejected
+	> My transaction
+		+ delateTransaction (transactionId)
+_ProfileScreen
+	- auth
+	+ editProfile(user)
+	+ signOut()
